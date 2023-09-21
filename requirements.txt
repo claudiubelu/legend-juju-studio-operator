@@ -3,3 +3,5 @@ pyjks
 pyOpenSSL
 lightkube
 lightkube-models
+# Needed in order to avoid a circular dependency between httpx, pluggy, and setuptools-scm.
+httpx==0.23.0
