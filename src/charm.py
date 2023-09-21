@@ -68,9 +68,12 @@ class LegendStudioCharm(legend_operator_base.BaseFinosLegendCoreServiceCharm):
     def _get_application_connector_port(cls):
         return APPLICATION_CONNECTOR_PORT_HTTP
 
-    @classmethod
-    def _get_ingress_routes(cls) -> str:
-        return STUDIO_INGRESS_ROUTE
+    def _get_ingress_routes(self) -> str:
+        # If use-root-path is True, we should set up / as the ingress route for
+        # Legend Studio. Otherwise, we should only set up /studio as the ingress route.
+        if self.config["use-root-path"]:
+            return STUDIO_INGRESS_ROUTE
+        return APPLICATION_SERVER_UI_PATH
 
     @classmethod
     def _get_workload_container_name(cls):

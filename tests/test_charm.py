@@ -56,6 +56,14 @@ class LegendStudioTestCase(legend_operator_testing.TestBaseFinosCoreServiceLegen
         harness = ops_testing.Harness(LegendStudioTestWrapper)
         return harness
 
+    def test_get_ingress_routes(self):
+        self.harness.begin_with_initial_hooks()
+        # use-root-path is True by default.
+        self.assertEqual("/", self.harness.charm._get_ingress_routes())
+
+        self.harness.update_config({"use-root-path": False})
+        self.assertEqual("/studio", self.harness.charm._get_ingress_routes())
+
     def test_relations_waiting(self):
         self._test_relations_waiting()
 

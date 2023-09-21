@@ -43,3 +43,11 @@ options:
     description: |
       String representing the DNS name this Application should respond to.
       By default, this will be the Application's name.
+
+  use-root-path:
+    type: boolean
+    default: true
+    description: |
+      Boolean representing whether or not this Charm will set up an ingress
+      route for the `/` path. If false, the Charm will set up an ingress route
+      for `/studio` instead.
